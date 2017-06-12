@@ -1,0 +1,84 @@
+{% extends 'admin/base.html' %}
+
+{% block branding %}
+   <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+                 <a class="navbar-brand" href="#">Weather Result</a>
+            </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-right">
+                {% if user.is_authenticated %}
+                   <a href="{% url 'weatherapp:logout' %}">logout</a>
+               {% else %}
+                  <a href="{% url 'weatherapp:login' %}">login</a> / <a href="{% url 'weatherapp:register' %}">Register</a>
+              {% endif %}
+
+            </ul>
+          </div><!--/.nav-collapse -->
+
+      </div><!--/.container-fluid -->
+</nav>
+{% endblock %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+
+  <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Date and Time</th>
+      <th>Minimum Temperature</th>
+      <th>Maximum Temperature</th>
+      <th>Wind</th>
+      <th>Rain</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for entry in weather %}
+      <tr>
+        <td>{{ entry.date }}</td>
+        <td>{{ entry.min_temp }}</td>
+        <td>{{ entry.max_temp }}</td>
+        <td>{{ entry.wind }}</td>
+        <td>{{ entry.rain }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<footer>
+{% if weather.has_other_pages %}
+ <nav>
+  <ul class="pagination">
+    {% if weather.has_previous %}
+      <li><a href="?page={{ weather.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in weather.paginator.page_range %}
+      {% if weather.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if weather.has_next %}
+      <li><a href="?page={{ weather.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+  </nav>
+{% endif %}
+
+</footer>
+{% endblock %}

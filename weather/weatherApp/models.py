@@ -40,10 +40,15 @@ class MyUser(AbstractBaseUser):
     )
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-
+    email_confirmed = models.BooleanField(default=False)
+    
     objects = MyUserManager()
 
     USERNAME_FIELD = 'email'
+    
+    class Meta:
+        verbose_name = 'Weather App User'
+        verbose_name_plural = 'Weather App Users'
 
     def get_full_name(self):
         # The user is identified by their email address
@@ -71,3 +76,20 @@ class MyUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+
+
+
+class Weather(models.Model):
+    date = models.DateTimeField(primary_key=True)
+    min_temp = models.FloatField()
+    max_temp = models.FloatField()
+    wind = models.FloatField()
+    rain = models.CharField(max_length=30, blank=True, null=True)
+    
+    class Meta:
+        verbose_name = 'Weather Record'
+        verbose_name_plural = 'Weather Records'
+
+    def __unicode__(self):
+       return "%s" % (self.date)
