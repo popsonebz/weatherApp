@@ -31,12 +31,18 @@ python manage.py migrate
 ```
 python manage.py createsuperuser
 ``` 
-
+## Admin Operation
+### Populating the database from remote api using management command
+Run the code below:
+```
+ python manage.py import_weather
+```
 8. We can now startup the server
 ```
 python manage.py runserver localhost:8020
 ```
 ## Admin Operation
+### Populating the database
 
 First of all, we need to add employees to the system
 
