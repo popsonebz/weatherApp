@@ -46,11 +46,7 @@ python manage.py runserver localhost:8020
 ```
 localhost:8020/admin
 ```
-2. 
-Note:
-
-1. By default, all employees have 18 days of leave.
-2. This page was just added based on initiative as it was not specified in the task.
+2. The admin can add/change/delete new users or weather records from this interface.
 
 ## Employee Operation
 
