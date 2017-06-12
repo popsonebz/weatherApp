@@ -134,8 +134,8 @@ LOGIN_REDIRECT_URL = '/weatherapp/'
 
 
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'popsonebz'
-EMAIL_HOST_PASSWORD = 'fisayo6767'
+EMAIL_HOST_USER = 'username'
+EMAIL_HOST_PASSWORD = 'password'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
