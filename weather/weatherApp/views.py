@@ -21,7 +21,7 @@ from rest_framework import generics
 from .serializers import WeatherSerializer
 from .models import Weather
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 from django.contrib.auth.decorators import login_required
 
@@ -93,7 +93,7 @@ def home(request):
 
 class CreateView(generics.ListCreateAPIView):
     authentication_classes = (SessionAuthentication, BasicAuthentication)
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,IsAdminUser)
     """This class defines the create behavior of our rest api."""
     queryset = Weather.objects.all()
     serializer_class = WeatherSerializer
@@ -101,3 +101,10 @@ class CreateView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         """Save the post data when creating a new bucketlist."""
         serializer.save()
+
+class RecordsView(generics.ListAPIView):
+    authentication_classes = (SessionAuthentication, BasicAuthentication)
+    permission_classes = (IsAuthenticated,)
+    """This class defines the create behavior of our rest api."""
+    queryset = Weather.objects.all()
+    serializer_class = WeatherSerializer

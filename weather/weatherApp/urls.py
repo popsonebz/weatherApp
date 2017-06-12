@@ -4,7 +4,7 @@ from django.conf.urls import url, include
 from django.core.urlresolvers import reverse
 
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import CreateView
+from .views import CreateView, RecordsView
 
 
 
@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, {'template_name': 'admin/login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/weatherapp/login/'}, name='logout'),
 
+    url(r'^api/retrieve/$', RecordsView.as_view(), name="retrieve"),
     url(r'^api/create/$', CreateView.as_view(), name="create"),
 ]
 

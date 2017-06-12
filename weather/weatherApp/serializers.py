@@ -8,4 +8,4 @@ class WeatherSerializer(serializers.ModelSerializer):
         """Meta class to map serializer's fields with the model fields."""
         model = Weather
         fields = ('date', 'min_temp', 'max_temp', 'wind', 'rain')
-        read_only_fields = ('date', 'min_temp', 'max_temp', 'wind', 'rain')
+        #read_only_fields = ('date', 'min_temp', 'max_temp', 'wind', 'rain')

@@ -41,74 +41,34 @@ Run the code below:
 ```
 python manage.py runserver localhost:8020
 ```
-## Admin Operation 2
+## Admin Operation 2 on main website and API
 1. The super user can access the backend using the url below
 ```
 localhost:8020/admin
 ```
 2. The admin can add/change/delete new users or weather records from this interface.
-
-## Employee Operation
-
-1. To apply for leave, the employee visits this url
-
-<http://localhost:8010/leave/apply>
-
-2. He/She is redirected to the login page for authentication
-
-3. If Authentication is successful, the application page is displayed.
-
-4. On selecting the start and end dates, the following are checked:
-
-- Both either start or end date or end date cannot be less than the current date.
-- The end date cannot be less than the start date.
-- Start date cannot later than end date.
-- End date cannot be the same as start date.
-- Notify the user when there is no working days within the specified period.
-- Preventing duration which exceeds the maximum 18 days of leave allocated.
-
-### Automatically Decline the following leave application:
-
-- Employees who have not spent up to 3 months in the company from appying for leave.
-- Employee who has exhausted his leave.
-- Employee taking more than the remaining leave days he has.
-
-## Selenium Functional Test
-
-Note: To use the functional test, the following needs to be done:
-1. Chrome webdriver needs to be downloaden and placed into the folder path (tanget_leave_app_solution/leave/)
-
-2. The webdriver path needs to be set accordingly as seen in leave/test.py (the current path only works on my laptop).
-
-3. Open the link <http://localhost:8010/admin/add-employee/>
-
-4. Create the following users:
+3. The super user can access the weather record API via:
 ```
-first name = kate, last name = perry, employment date = 01/01/2017, username = kate, password= kate
-
+localhost:8020/weatherapp/api/create/
 ```
+Records can be viewed, created, changed or deleted.
+
+## Other User's Operation
+1. Other users can access the backend using the url below:
 ```
-first name = ben, last name = carson, employment date = 29/05/2017, username = ben, password= ben
-
+http://localhost:8020/weatherapp/
 ```
+2. An existing user enter his login details and click the login button to view weather records.
 
-3. Then run the command:
+3. New users can directly click the register button. An email will be sent for activation.
+
+4. The user can access the weather record API via:
 ```
-   python manage.py test
+localhost:8020/weatherapp/api/retrieve/
 ```
-
-## Carrying Over Leave Not Taken
-
-The system carry's over a maximum of 5 days leave.
-
-This is done in the management command defined in leave/management/commands/carry_leave_over_the_year.py
-
-The operation can be carried out in 2 ways:
-
-1. Manually at the end of the year
+5. To view these records can also be retrieve by other python apps by including this to their code:
 ```
-   python manage.py carry_leave_over_the_year
+import requests
+response = requests.get("http://localhost:8020/weatherapp/api/retrieve/", auth=('email address', 'password'))
+print response.content
 ```
-2. Automatically by creating a linux crontab job which executes once a day to check if its the last day of the year.
-
-if the condition is met, the command in option 1  will be executed.
