@@ -27,27 +27,26 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-7. Create a super user who serves as the admin. It's gonna request for email and password
+8. Create a super user who serves as the admin. It's gonna request for email and password
 ```
 python manage.py createsuperuser
 ``` 
-## Admin Operation
+## Admin Operation 1
 ### Populating the database from remote api using management command
 Run the code below:
 ```
  python manage.py import_weather
 ```
-8. We can now startup the server
+9. We can now startup the server
 ```
 python manage.py runserver localhost:8020
 ```
-## Admin Operation
-### Populating the database
-
-First of all, we need to add employees to the system
-
-<http://localhost:8010/admin/add-employee/>
-
+## Admin Operation 2
+1. The super user can access the backend using the url below
+```
+localhost:8020/admin
+```
+2. 
 Note:
 
 1. By default, all employees have 18 days of leave.
