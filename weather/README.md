@@ -21,6 +21,13 @@ This creates a folder called weatherApp in the current directory.
 ```
 cd weatherApp/weather
 ```
+# PLEASE NOTE : EMAIL SETTINGS
+- For email functionality to work, kindly setup a sengrid (https://sendgrid.com)
+- Then change the settings.py email configuration by enditing the lines having:
+```
+EMAIL_HOST_USER = 'username'
+EMAIL_HOST_PASSWORD = 'password'
+``` 
 7. To create the database and tables, run the migration command
 ```
 python manage.py makemigrations
